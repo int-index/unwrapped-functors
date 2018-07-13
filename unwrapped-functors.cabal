@@ -6,7 +6,6 @@ author:              Vladislav Zavialov
 maintainer:          Vladislav Zavialov <vlad.z.4096@gmail.com>
 category:            Data
 build-type:          Simple
-extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
