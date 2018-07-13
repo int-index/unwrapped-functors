@@ -11,7 +11,7 @@ import Data.Functor.Const
 import Data.Functor.Compose
 import Data.Functor.Sum
 
-class Unwrappable f where
+class Functor f => Unwrappable f where
   type Unwrapped f x
   unwrap :: f x -> Unwrapped f x
   wrap :: Unwrapped f x -> f x
@@ -23,7 +23,7 @@ instance Unwrappable Proxy where
   unwrap Proxy = ()
   wrap () = Proxy
 
-instance (Functor f, Functor g, Unwrappable f, Unwrappable g) => Unwrappable (Compose f g) where
+instance (Unwrappable f, Unwrappable g) => Unwrappable (Compose f g) where
   type Unwrapped (Compose f g) x = Unwrapped f (Unwrapped g x)
   unwrap (Compose a) = unwrap (fmap unwrap a)
   wrap a = Compose (fmap wrap (wrap a))
